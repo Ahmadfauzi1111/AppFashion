@@ -2,18 +2,21 @@ import React from 'react';
 import { View, StyleSheet, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-import Slide from './Slide';
+import Slide, {SLIDE_HEIGHT} from './Slide';
 
 const { width, height } = Dimensions.get("window");
+
+
 
 const styles = StyleSheet.create({
     container: {
         flex:1,
+        backgroundColor: "white"
     },
     slider: {
-        height: 0.61 * height,
-        backgroundColor: "cyan",
+        height: SLIDE_HEIGHT,
         borderBottomRightRadius: 75,
+        backgroundColor: "cyan"
     },
     footer: {
         flex: 1,

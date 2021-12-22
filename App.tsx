@@ -13,7 +13,7 @@ const fonts = {
 const AuthenticationStack = createNativeStackNavigator();
 const AuthenticationNavigator = () => {
   return (
-    <AuthenticationStack.Navigator screenOptions={{ headerMode: 'screen' }} >
+    <AuthenticationStack.Navigator screenOptions={{ headerShown: true }}>
       <AuthenticationStack.Screen name="Onboarding" component={Onboarding} />
     </AuthenticationStack.Navigator>
   );
