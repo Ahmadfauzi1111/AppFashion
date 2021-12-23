@@ -1,10 +1,11 @@
 import React, {useRef} from 'react';
 import { View, StyleSheet, Dimensions, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import Animated, { multiply } from 'react-native-reanimated';
+import Animated, { divide, multiply } from 'react-native-reanimated';
 import Subslide from './SubsSlide';
 import Slide, {SLIDE_HEIGHT} from './Slide';
 import { useValue, onScrollEvent, interpolateColor, useScrollHandler } from 'react-native-redash';
+import Dot from "./Dot";
 
 const { width } = Dimensions.get("window");
 
@@ -23,9 +24,16 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     footerContainer: {
-        flexDirection: "row",
+        flex: 1,
         backgroundColor: "white",
         borderTopLeftRadius: BORDER_RADIUS
+    },
+    pagination: {
+        ...StyleSheet.absoluteFillObject,
+        height: BORDER_RADIUS,
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "row",
     }
 });
 const slides = [
@@ -102,13 +110,19 @@ const Onboarding = () => {
             </Animated.View>
             <View style={styles.footer}>
                 <Animated.View style={{ ...StyleSheet.absoluteFillObject, backgroundColor }} />
-                <Animated.View
-                style={[
-                    styles.footerContainer,
-                    {width: width * slides.length, flex: 1, transform: [{
-                        translateX: multiply(x, -1)
-                    }]}
-                ]}>
+                <View style={styles.footerContainer}>
+                    <View style={styles.pagination}>
+                        {slides.map((_, index) => (
+                        <Dot key={index} currentIndex={divide(x, width)} {...{index}} />)
+                        )}
+                    </View>
+                    <Animated.View style={{
+                        flex: 1,
+                        width: width * slides.length,
+                        flexDirection: "row",
+                        transform: [{ translateX: multiply(x, -1)}],
+                    }}>
+
                     {slides.map(({ subtitle, description },index) => (
                         <Subslide
                         key={index}
@@ -124,7 +138,8 @@ const Onboarding = () => {
                         {...{subtitle, description}} />
                     ))
                     }
-                </Animated.View>
+                    </Animated.View>
+                </View>
             </View>
         </View>
     )

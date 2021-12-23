@@ -1,7 +1,7 @@
 import React from 'react';
-import {StyleSheet, View, Text} from "react-native";
-import Animated from "react-native-reanimated";
+import { StyleSheet, View, Text } from 'react-native';
 import { Button } from "../../components";
+
 
 interface SubSlideProps {
     subtitle: string;
@@ -27,10 +27,10 @@ const Subslide = ({ subtitle, description, last, onPress}: SubSlideProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        padding: 44
+        padding: 44,
+        flex: 1
     },
     subtitle: {
         fontFamily: "SFProText-Semibold",
