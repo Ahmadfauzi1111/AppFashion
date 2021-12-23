@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import Animated from 'react-native-reanimated';
-
+import Animated, { multiply } from 'react-native-reanimated';
+import Subslide from './SubsSlide';
 import Slide, {SLIDE_HEIGHT} from './Slide';
 import { useValue, onScrollEvent, interpolateColor } from 'react-native-redash';
 
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
-
+const BORDER_RADIUS =75;
 
 const styles = StyleSheet.create({
     container: {
@@ -17,19 +17,70 @@ const styles = StyleSheet.create({
     },
     slider: {
         height: SLIDE_HEIGHT,
-        borderBottomRightRadius: 75,
+        borderBottomRightRadius: BORDER_RADIUS,
     },
     footer: {
         flex: 1,
     },
+    footerContainer: {
+        flexDirection: "row",
+        backgroundColor: "white",
+        borderTopLeftRadius: BORDER_RADIUS
+    }
 });
+const slides = [
+    {
+        title: "Relaxed",
+        color: "#BFEAF5",
+        subtitle: 'Find Your Outfit',
+        description: "Confused about your outfit? Don't worry! Find the best outfit here!",
+        picture: {
+            src: require("../assets/1.png"),
+            width: 730,
+            height: 1095
+        }
+    },
+    {
+        title: "Playfull",
+        color: "#BEECC4",
+        subtitle: 'Hear it First, Wear it First',
+        description: 'Hating the clothes in your wardrobe? Explore hundreds of outfit ideas',
+        picture: {
+            src: require("../assets/2.png"),
+            width: 690,
+            height: 1070
+        }
+    },
+    {
+        title: "Excentric",
+        color: "#FFE4D9",
+        subtitle: 'Your Style, Your Way',
+        description: 'Create your individual & unique style and look amazing everyday',
+        picture: {
+            src: require("../assets/3.png"),
+            width: 730,
+            height: 1095
+        }
+    },
+    {
+        title: "Funky",
+        color: "#FFDDDD",
+        subtitle: 'Look Good, Feel Good',
+        description: 'Discover the latest trends in fashion and explore your personality',
+        picture: {
+            src: require("../assets/4.png"),
+            width: 616,
+            height: 898
+        }
+    },
+]
 
 const Onboarding = () => {
     const x = useValue(0);
     const onScroll = onScrollEvent({ x });
     const backgroundColor = interpolateColor(x, {
-        inputRange: [0, width, width*2, width*3],
-        outputRange: ["#BFEAF5", "#BEECC4", "#FFE4D9", "#FFDDDD"]
+        inputRange: slides.map((_, i) => i* width),
+        outputRange: slides.map(slide => slide.color)
     });
     return (
         <View style={styles.container}>
@@ -40,19 +91,30 @@ const Onboarding = () => {
                 decelerationRate="fast"
                 showsHorizontalScrollIndicator={false}
                 bounces={false}
+                scrollEventThrottle={1}
                 {...{ onScroll }}
                 >
-                    <Slide label="Relaxed" />
-                    <Slide label="Playfull" right />
-                    <Slide label="Excentric" />
-                    <Slide label="Funky" right/>
+                    {slides.map(({ title },index) => (
+                        <Slide key={index} right={!!(index % 2)} {...{title}} />
+                    ))
+                    }
                 </Animated.ScrollView>
             </Animated.View>
             <View style={styles.footer}>
                 <Animated.View style={{ ...StyleSheet.absoluteFillObject, backgroundColor }} />
-                <View style={{ flex:1, backgroundColor: "white", borderTopLeftRadius: 75 }}>
-
-                </View>
+                <Animated.View
+                style={[
+                    styles.footerContainer,
+                    {width: width * slides.length, flex: 1, transform: [{
+                        translateX: multiply(x, -1)
+                    }]}
+                ]}>
+                    {slides.map(({ subtitle, description },index) => (
+                        <Subslide key={index} last={index === slides.length -1}
+                        {...{subtitle, description}} />
+                    ))
+                    }
+                </Animated.View>
             </View>
         </View>
     )
