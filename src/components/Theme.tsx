@@ -1,12 +1,36 @@
+import React, {ReactNode} from "react";
 import { createText, createBox } from '@shopify/restyle'
+
+export const palette = {
+    white: "white",
+    green: "#2CB9B0",
+    orange: "#FE5E33",
+    yellow: "#FFC641",
+    pink: "#FF87A2",
+    violet: "#442CB9",
+    customViolet: "#160029",
+    customViolet2: "#120934",
+    lightblue: "#BFEAF5",
+    transparent: "transparent"
+}
 
 const theme  = {
     colors: {
-        primary: "#2CB9B0",
-        title: "#0C0D34",
-        text: "rgba(12,13,52,0.7)",
-        white: "white",
-        grey: "rgba(12,13,52,0.05)"
+        primary: palette.green,
+        primaryLight: "#E7F9F7",
+        secondary: "#0C0D34",
+        danger: "#FF0058",
+        info: "#808080",
+        text: "rgba(12, 13, 52, 0.7)",
+        background: palette.white,
+        background2: "#F4F0EF",
+
+        graph1: palette.orange,
+        graph2: palette.yellow,
+        drawer1: palette.orange,
+        drawer2: palette.yellow,
+        drawer3: palette.pink,
+        drawer4: palette.violet
     },
     spacing: {
         s: 8,
@@ -27,18 +51,23 @@ const theme  = {
             lineHeight: 80,
             fontFamily: "Bold",
             textAlign: "center",
-            color: "white"
+            color: "background"
         },
         title1: {
             fontSize: 28,
             fontFamily: "SemiBold",
-            color: "title"
+            color: "secondary"
         },
         title2: {
             fontSize: 24,
             lineHeight: 30,
             fontFamily: "SemiBold",
-            color: "title"
+            color: "secondary"
+        },
+        title3: {
+            fontSize: 16,
+            fontFamily: "SemiBold",
+            color: "secondary"
         },
         body: {
             fontSize: 16,
@@ -56,7 +85,7 @@ const theme  = {
             fontSize: 12,
             fontFamily: "SemiBold",
             lineHeight: 24,
-            // color: "secondary"
+            color: "secondary"
         }
     },
     breakpoints: {
@@ -65,6 +94,11 @@ const theme  = {
     },
 };
 
+export const ThemeProvider = ({ children }: { children: ReactNode }) => (
+    <ReStyleThemeProvider theme={theme}>
+        {children}
+    </ReStyleThemeProvider>
+)
 
 export type Theme = typeof theme;
 export const Text = createText<Theme>();
