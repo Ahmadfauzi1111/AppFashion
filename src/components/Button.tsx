@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { View, StyleSheet } from "react-native";
 import { RectButton } from 'react-native-gesture-handler';
-import { Text, theme } from "../components";
+import { Text, useTheme } from "./Theme"
 
 interface ButtonProps {
     variant: "default" | "primary" | "transparent";
@@ -12,7 +12,7 @@ interface ButtonProps {
 }
 
 const Button = ({ label, variant, onPress, children, style }: ButtonProps) => {
-
+    const theme = useTheme();
     const backgroundColor =
         variant === "primary" ?
             theme.colors.primary
