@@ -1,5 +1,5 @@
 import React from "react";
-import { theme, Box, Text, Button } from "../../components";
+import { theme, Box, Text, Button, BorderlessTap } from "../../components";
 import { Dimensions, Image } from "react-native";
 import {AuthNavigationProps} from "../../components/Navigation";
 
@@ -50,11 +50,14 @@ const Welcome = ({ navigation }:  AuthNavigationProps<"Welcome">) => {
                         onPress={() => navigation.navigate("Login")}
                     />
                     <Button label="Join us, it's free" onPress={() => navigation.navigate("SignUp")} />
-                    <Button
-                        variant="transparent"
-                        label="Forgot password?"
-                        onPress={() => navigation.navigate("ForgotPassword")}
-                    />
+                    <BorderlessTap
+                        onPress={() => navigation.navigate("ForgotPassword")}>
+                        <Text
+                            variant="button"
+                            color="secondary">
+                                Forgot Password?
+                        </Text>
+                    </BorderlessTap>
                 </Box>
             </Box>
         </Box>

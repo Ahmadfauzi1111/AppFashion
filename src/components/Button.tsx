@@ -1,11 +1,11 @@
 import React, { ReactNode } from "react";
-import { View, StyleSheet } from "react-native";
-import { RectButton } from 'react-native-gesture-handler';
+import { StyleSheet } from "react-native";
+import { RectButton, RectButtonProperties } from 'react-native-gesture-handler';
 import { Text, useTheme } from "./Theme"
 
 interface ButtonProps {
     variant: "default" | "primary" | "transparent";
-    label: string;
+    label?: string;
     onPress: () => void;
 	children?: ReactNode
 	style?: RectButtonProperties["style"]

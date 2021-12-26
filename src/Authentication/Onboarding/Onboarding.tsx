@@ -1,10 +1,9 @@
 import React, {useRef} from 'react';
 import { View, StyleSheet, Dimensions, Image } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import Animated, { divide, multiply, Extrapolate, interpolate } from 'react-native-reanimated';
 import Subslide from './SubsSlide';
 import Slide, {SLIDE_HEIGHT} from './Slide';
-import { useValue, onScrollEvent, interpolateColor, useScrollHandler } from 'react-native-redash';
+import { interpolateColor, useScrollHandler } from 'react-native-redash';
 import Dot from "./Dot";
 import {AuthNavigationProps} from "../../components/Navigation";
 import { theme } from "../../components";
@@ -20,7 +19,6 @@ const styles = StyleSheet.create({
     underlay: {
         ...StyleSheet.absoluteFillObject,
         alignItems: "center",
-        justifyContent: "center",
         justifyContent: "flex-end",
         borderTopLeftRadius: theme.borderRadii.xl,
         overflow: "hidden"
