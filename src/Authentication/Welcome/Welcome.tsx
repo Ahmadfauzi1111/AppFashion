@@ -1,5 +1,5 @@
 import React from "react";
-import { theme, Box, Text, Button, BorderlessTap } from "../../components";
+import { useTheme, Box, Text, Button, BorderlessTap } from "../../components";
 import { Dimensions, Image } from "react-native";
 import {AuthNavigationProps} from "../../components/Navigation";
 
@@ -13,7 +13,7 @@ const picture = {
 export const assets = [picture.src];
 
 const Welcome = ({ navigation }:  AuthNavigationProps<"Welcome">) => {
-
+    const theme = useTheme();
     return (
         <Box flex={1} backgroundColor="background" >
             <Box flex={1} borderBottomRightRadius="xl" backgroundColor="background2" justifyContent="flex-end">

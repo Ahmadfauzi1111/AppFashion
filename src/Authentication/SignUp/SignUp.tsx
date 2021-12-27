@@ -50,7 +50,7 @@ const SignUp = ({ navigation }:  AuthNavigationProps<"SignUp">) => {
         <Container pattern={1} {... { footer }}>
             <Text variant="title1" textAlign="center">Create an account</Text>
             <Text variant="body" textAlign="center" marginBottom="l" marginTop="l">
-               Let's us know what's your name, email, and password
+                Let's us know what's your name, email, and password
             </Text>
 
             <Box>

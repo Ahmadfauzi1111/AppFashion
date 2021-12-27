@@ -6,12 +6,13 @@ import Slide, {SLIDE_HEIGHT} from './Slide';
 import { interpolateColor, useScrollHandler } from 'react-native-redash';
 import Dot from "./Dot";
 import {AuthNavigationProps} from "../../components/Navigation";
-import { theme } from "../../components";
+import {useTheme, makeStyles} from "../../components";
+import {Theme} from "../../components/Theme";
 
 
 const { width } = Dimensions.get("window");
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme: Theme) => ({
     container: {
         flex:1,
         backgroundColor: theme.colors.background
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flexDirection: "row",
     }
-});
+}));
 const slides = [
     {
         title: "Relaxed",
@@ -93,6 +94,8 @@ const slides = [
 export const assets = slides.map(slide => slide.picture.src);
 
 const Onboarding  = ({ navigation }: AuthNavigationProps<"Onboarding">) => {
+    const styles = useStyles();
+    const theme = useTheme();
     const scroll = useRef<Animated>(null);
     const {scrollHandler, x} = useScrollHandler();
     const backgroundColor = interpolateColor(x, {

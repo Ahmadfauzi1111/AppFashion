@@ -54,7 +54,6 @@ const Login = ({ navigation }: AuthNavigationProps<"Login">) => {
             <Text variant="body" textAlign="center" marginBottom="l" marginTop="l">
                 Use your credentials below and login to your account
             </Text>
-
             <Box>
                 <Box marginBottom="m">
                     <TextInputField

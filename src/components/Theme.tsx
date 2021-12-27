@@ -5,8 +5,10 @@ import {
     useTheme as useReTheme,
     ThemeProvider as ReStyleThemeProvider
 } from '@shopify/restyle';
-import {ImageStyle, TextStyle, ViewStyle} from "react-native";
+import {Dimensions, ImageStyle, TextStyle, ViewStyle} from "react-native";
 
+const { width } = Dimensions.get("window");
+export const aspectRatio = width / 374;
 export const palette = {
     white: "white",
     green: "#2CB9B0",
@@ -20,7 +22,7 @@ export const palette = {
     transparent: "transparent"
 }
 
-const theme  = {
+const theme = {
     colors: {
         primary: palette.green,
         primaryLight: "#E7F9F7",
